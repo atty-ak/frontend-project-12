@@ -4,17 +4,17 @@ import { object, string } from 'yup';
 const LoginPage = () => {
   const formik = useFormik({
     initialValues: {
-      login: '',
+      username: '',
       password: '',
     },
     validationSchema: object({
-      login: string()
+      username: string()
         .required(),
       password: string()
         .required(),
     }),
-    onSubmit: () => {
-      alert('бам');
+    onSubmit: (values) => {
+      console.log(JSON.stringify(values, null, 2));
     },
   });
   return (
@@ -38,11 +38,11 @@ const LoginPage = () => {
           name="password"
           autoComplete="password"
           required
-          placeholder="Ваш ник"
+          placeholder="Ваш пароль"
           id="password"
           className="form-control"
           onChange={formik.handleChange}
-          value={formik.values.username}
+          value={formik.values.password}
         />
         <label htmlFor="password">Ваш пароль</label>
       </div>

@@ -1,7 +1,5 @@
-const ChatPage = () => {
-  return (
-    <h1>Страница чата</h1>
-  );
-};
+const ChatPage = () => (
+  <h1>Страница чата</h1>
+);
 
 export default ChatPage;

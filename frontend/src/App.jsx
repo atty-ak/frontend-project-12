@@ -3,7 +3,7 @@ import {
 } from 'react-router-dom';
 import { io } from 'socket.io-client';
 import { useDispatch } from 'react-redux';
-import ChatPage from './components/ChatPage';
+import ChatPage from './components/chat/ChatPage';
 import ErrorPage from './components/ErrorPage';
 import LoginPage from './components/LoginPage';
 import routes from './routes';
@@ -16,7 +16,6 @@ import { addChannel } from './slices/channels';
 const PrivateRoute = ({ children }) => {
   const auth = useAuth();
   const location = useLocation();
-  console.log(auth.loggedIn);
 
   return (
     auth.loggedIn ? children : <Navigate to={routes.loginPage} state={{ from: location }} />

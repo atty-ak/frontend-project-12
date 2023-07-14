@@ -3,13 +3,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
-import { addChannels, channelsSelectors } from '../slices/channels';
-import { fetchMessages, messagesSelectors } from '../slices/messages';
-import routes from '../routes';
-import useAuth from '../hooks/useAuth';
+import { addChannels, channelsSelectors } from '../../slices/channels';
+import { fetchMessages, messagesSelectors } from '../../slices/messages';
+import routes from '../../routes';
+import useAuth from '../../hooks/useAuth';
 import SendMessage from './SendMessage';
-import getModal from './modal/modals';
-import { addModal } from '../slices/modal';
+import getModal from '../modal/modals';
+import { addModal } from '../../slices/modal';
 
 const ChatPage = () => {
   const [channelName, setChannel] = useState('general');

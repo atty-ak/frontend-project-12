@@ -1,16 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import _ from 'lodash';
-import useSocket from '../hooks/useSocket';
-import { addMessage } from '../slices/messages';
+import useSocket from '../../hooks/useSocket';
 
 const SendMessage = ({ loggedIn, channelName }) => {
   const [message, setMessage] = useState('');
   const inputEl = useRef(null);
 
-  const socket = useSocket();
-
-  const dispatch = useDispatch();
+  const chatApi = useSocket();
 
   useEffect(() => {
     inputEl.current.focus();
@@ -25,8 +21,7 @@ const SendMessage = ({ loggedIn, channelName }) => {
         id: _.uniqueId(),
         value: message,
       };
-      socket.emit('newMessage', formedMessage);
-      dispatch(addMessage(formedMessage));
+      chatApi.addMessage(formedMessage);
       setMessage('');
     }
   };

@@ -7,10 +7,10 @@ import useSocket from '../../hooks/useSocket';
 
 const Add = () => {
   const dispatch = useDispatch();
-  const socket = useSocket();
+  const chatApi = useSocket();
 
   const handleSubmit = (body) => {
-    socket.emit('newChannel', { name: body });
+    chatApi.addChannel({ name: body });
     dispatch(addModal('unactive'));
   };
 

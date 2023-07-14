@@ -12,6 +12,7 @@ import useAuth from './hooks/useAuth';
 import SocketProvider from './providers/SocketProvider';
 import { addMessage } from './slices/messages';
 import { addChannel, removeChannel, renameChannel } from './slices/channels';
+import SignupPage from './components/SignupPage';
 
 const PrivateRoute = ({ children }) => {
   const auth = useAuth();
@@ -48,6 +49,7 @@ const App = () => {
           <Routes>
             <Route path={routes.chatPage} element={<PrivateRoute><ChatPage /></PrivateRoute>} />
             <Route path={routes.loginPage} element={<LoginPage />} />
+            <Route path={routes.signupPage} element={<SignupPage />} />
             <Route path="*" element={<ErrorPage />} />
           </Routes>
         </Router>

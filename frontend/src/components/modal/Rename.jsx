@@ -11,7 +11,7 @@ const Rename = ({ channel }) => {
   const chatApi = useSocket();
   const inputEl = useRef(null);
 
-  const handleRename = (body) => {
+  const handleSubmit = (body) => {
     chatApi.renameChannel({ id: channel.id, name: body });
     dispatch(addModal({ type: 'unactive' }));
   };
@@ -26,7 +26,7 @@ const Rename = ({ channel }) => {
         .max(15, 'Must be 15 characters or less')
         .required('Required'),
     }),
-    onSubmit: ({ body }) => handleRename(body),
+    onSubmit: ({ body }) => handleSubmit(body),
   });
 
   useEffect(() => {
@@ -46,7 +46,7 @@ const Rename = ({ channel }) => {
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={() => dispatch(addModal({ type: 'unactive' }))}>Отмена</Button>
-        <Button variant="primary" onClick={() => handleRename(formik.values.body)}>Сохранить</Button>
+        <Button variant="primary" type="submit" onClick={() => handleSubmit(formik.values.body)}>Сохранить</Button>
       </Modal.Footer>
     </Modal>
   );

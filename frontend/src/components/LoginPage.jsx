@@ -95,7 +95,7 @@ const LoginPage = () => {
                 <div className="card-footer p-4">
                   <div className="text-center">
                     <span>Нет аккаунта?</span>
-                    <a href="/signup">Регистрация</a>
+                    <a href={routes.signupPage}>Регистрация</a>
                   </div>
                 </div>
               </div>

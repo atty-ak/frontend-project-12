@@ -2,17 +2,22 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import classNames from 'classnames';
+import { useNavigate } from 'react-router-dom';
 import { addChannels, channelsSelectors } from '../slices/channels';
 import { fetchMessages, messagesSelectors } from '../slices/messages';
 import routes from '../routes';
 import useAuth from '../hooks/useAuth';
 import SendMessage from './SendMessage';
+import getModal from './modal/modals';
+import { addModal } from '../slices/modal';
 
 const ChatPage = () => {
   const [channelName, setChannel] = useState('general');
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { loggedIn, getAuthHeader } = useAuth();
+  const modalState = useSelector((state) => state.modal.value);
   const channelsList = useSelector(channelsSelectors.selectAll);
   const messagesList = useSelector(messagesSelectors.selectAll);
 
@@ -27,10 +32,11 @@ const ChatPage = () => {
         }
       } catch (e) {
         console.log(e);
+        navigate(routes.loginPage);
       }
     };
     fetchData();
-  });
+  }, []);
 
   const renderChannels = () => (
     <ul className="nav flex-column nav-pills nav-fill px-2">
@@ -59,7 +65,11 @@ const ChatPage = () => {
               {channelName}
             </b>
           </p>
-          <span className="text-muted">Здесь будет количество сообщений в канале</span>
+          <span className="text-muted">
+            <span>Сообщений: </span>
+            {messagesList
+              .filter((message) => message.channelName === channelName).length}
+          </span>
         </div>
         <div id="messages-box" className="chat-messages overflow-auto px-5 ">
           {messagesList
@@ -83,11 +93,12 @@ const ChatPage = () => {
         <div className="col-4 col-md-2 border-end pt-5 px-0 bg-light">
           <div className="d-flex justify-content-between mb-2 ps-4 pe-2">
             <span>Каналы</span>
-            <button type="button" aria-label="Add channel" className="p-0 text-primary btn btn-group-vertical">+</button>
+            <button onClick={() => dispatch(addModal('add'))} type="button" aria-label="Add channel" className="p-0 text-primary btn btn-group-vertical">+</button>
           </div>
           {renderChannels()}
         </div>
         {renderMessages()}
+        {getModal(modalState)}
       </div>
     </div>
   );

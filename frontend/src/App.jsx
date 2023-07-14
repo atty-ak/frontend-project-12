@@ -11,6 +11,7 @@ import AuthProvider from './providers/AuthProvider';
 import useAuth from './hooks/useAuth';
 import SocketProvider from './providers/SocketProvider';
 import { addMessage } from './slices/messages';
+import { addChannel } from './slices/channels';
 
 const PrivateRoute = ({ children }) => {
   const auth = useAuth();
@@ -25,9 +26,14 @@ const PrivateRoute = ({ children }) => {
 const App = () => {
   const dispatch = useDispatch();
   const socket = io();
+
   socket.on('newMessage', (message) => {
     console.log(message);
     dispatch(addMessage(message));
+  });
+
+  socket.on('newChannel', (channel) => {
+    dispatch(addChannel(channel));
   });
 
   return (

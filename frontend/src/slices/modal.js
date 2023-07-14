@@ -1,16 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  value: 'unactive',
+  value: { type: 'unactive' },
 };
 
 const modalSlice = createSlice({
   name: 'modal',
   initialState,
   reducers: {
-    addModal: (state, action) => {
+    addModal: (state, { payload }) => {
       // eslint-disable-next-line no-param-reassign
-      state.value = action.payload;
+      state.value = payload;
     },
   },
 });

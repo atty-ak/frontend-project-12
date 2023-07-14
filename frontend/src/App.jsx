@@ -11,7 +11,7 @@ import AuthProvider from './providers/AuthProvider';
 import useAuth from './hooks/useAuth';
 import SocketProvider from './providers/SocketProvider';
 import { addMessage } from './slices/messages';
-import { addChannel } from './slices/channels';
+import { addChannel, removeChannel, renameChannel } from './slices/channels';
 
 const PrivateRoute = ({ children }) => {
   const auth = useAuth();
@@ -27,12 +27,18 @@ const App = () => {
   const socket = io();
 
   socket.on('newMessage', (message) => {
-    console.log(message);
     dispatch(addMessage(message));
   });
 
   socket.on('newChannel', (channel) => {
     dispatch(addChannel(channel));
+  });
+
+  socket.on('removeChannel', ({ id }) => {
+    dispatch(removeChannel(id));
+  });
+  socket.on('renameChannel', ({ id, name }) => {
+    dispatch(renameChannel({ id, changes: { name } }));
   });
 
   return (

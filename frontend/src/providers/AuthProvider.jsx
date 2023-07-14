@@ -4,14 +4,27 @@ import AuthContext from '../contexts/AuthContext';
 const AuthProvider = ({ children }) => {
   const [loggedIn, setLoggedIn] = useState(false);
 
-  const logIn = () => setLoggedIn(true);
+  const logIn = (username) => setLoggedIn(username);
   const logOut = () => {
     localStorage.removeItem('userId');
     setLoggedIn(false);
   };
 
+  const getAuthHeader = () => {
+    const userId = JSON.parse(localStorage.getItem('userId'));
+
+    if (userId && userId.token) {
+      return { Authorization: `Bearer ${userId.token}` };
+    }
+
+    return {};
+  };
+
   return (
-    <AuthContext.Provider value={{ loggedIn, logIn, logOut }}>
+    <AuthContext.Provider value={{
+      loggedIn, logIn, logOut, getAuthHeader,
+    }}
+    >
       {children}
     </AuthContext.Provider>
   );

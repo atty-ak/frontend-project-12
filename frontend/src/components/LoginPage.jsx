@@ -31,9 +31,9 @@ const LoginPage = () => {
     onSubmit: async (values) => {
       try {
         const res = await axios.post(routes.login, values);
-        const { token } = res.data;
-        localStorage.setItem('userId', JSON.stringify({ token }));
-        auth.logIn();
+        const { token, username } = res.data;
+        localStorage.setItem('userId', JSON.stringify({ token, username }));
+        auth.logIn(username);
         navigate(routes.chatPage);
       } catch (err) {
         setErrorState(true);

@@ -7,12 +7,13 @@ import ChatPage from './components/chat/ChatPage';
 import ErrorPage from './components/ErrorPage';
 import LoginPage from './components/LoginPage';
 import routes from './routes';
-import AuthProvider from './providers/AuthProvider';
 import useAuth from './hooks/useAuth';
 import SocketProvider from './providers/SocketProvider';
 import { addMessage } from './slices/messages';
 import { addChannel, removeChannel, renameChannel } from './slices/channels';
 import SignupPage from './components/SignupPage';
+import NavBar from './components/NavBar';
+import AuthProvider from './providers/AuthProvider';
 
 const PrivateRoute = ({ children }) => {
   const auth = useAuth();
@@ -45,6 +46,7 @@ const App = () => {
   return (
     <AuthProvider>
       <SocketProvider socket={socket}>
+        <NavBar />
         <Router>
           <Routes>
             <Route path={routes.chatPage} element={<PrivateRoute><ChatPage /></PrivateRoute>} />

@@ -14,8 +14,8 @@ import Messages from './Messages';
 const ChatPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const { getAuthHeader } = useAuth();
+
   const modalState = useSelector((state) => state.modal.value);
   const channelsList = useSelector(channelsSelectors.selectAll);
   const curChannel = useSelector((state) => state.channels.curChannel);
@@ -37,6 +37,7 @@ const ChatPage = () => {
       }
     };
     fetchData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

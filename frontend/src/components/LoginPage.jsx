@@ -33,22 +33,17 @@ const LoginPage = () => {
         const response = await axios.post(routes.login, values);
         const { token, username } = response.data;
         localStorage.setItem('userId', JSON.stringify({ token, username }));
-        auth.logIn(username);
+        const userId = JSON.parse(localStorage.getItem('userId'));
+        auth.logIn(userId.username);
         navigate(routes.chatPage);
       } catch (err) {
         setErrorState(true);
-        formik.setSubmitting(false);
       }
     },
   });
   return (
     <div className="h-100" id="chat">
       <div className="d-flex flex-column h-100">
-        <nav className="shadow-sm navbar navbar-expand-lg navbar-light bg-white">
-          <div className="container">
-            <a className="navbar-brand" href="/">Hexlet Chat</a>
-          </div>
-        </nav>
         <div className="container-fluid h-100">
           <div className="row justify-content-center align-content-center h-100">
             <div className="col-12 col-md-8 col-xxl-6">

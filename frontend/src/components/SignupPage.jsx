@@ -53,7 +53,7 @@ const SignupPage = () => {
         <div className="col-12 col-md-8 col-xxl-6">
           <div className="card shadow-sm">
             <div className="card-body d-flex flex-column flex-md-row justify-content-around align-items-center p-5">
-              <div><img src="" alt="" /></div>
+              <div><img src="/pictures/signup_page.jpg" alt="" /></div>
               <form className="w-50" onSubmit={formik.handleSubmit}>
                 <h1>Регистрация</h1>
                 <div className="form-floating mb-3">

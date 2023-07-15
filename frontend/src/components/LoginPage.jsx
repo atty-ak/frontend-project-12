@@ -50,7 +50,7 @@ const LoginPage = () => {
               <div className="card shadow-sm">
                 <div className="card-body row p-5">
                   <div className="col-12 col-md-6 d-flex align-items-center justify-content-center">
-                    <img src="/pictures/chat_form.svg" className="rounded-circle" alt="Войти" />
+                    <img src="/pictures/chat_form.jpeg" className="rounded-circle" alt="Войти" />
                   </div>
                   <Form onSubmit={formik.handleSubmit}>
                     <h1 className="text-center mb-4">Войти</h1>

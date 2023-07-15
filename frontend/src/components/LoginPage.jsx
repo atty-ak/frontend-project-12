@@ -30,8 +30,8 @@ const LoginPage = () => {
     }),
     onSubmit: async (values) => {
       try {
-        const res = await axios.post(routes.login, values);
-        const { token, username } = res.data;
+        const response = await axios.post(routes.login, values);
+        const { token, username } = response.data;
         localStorage.setItem('userId', JSON.stringify({ token, username }));
         auth.logIn(username);
         navigate(routes.chatPage);

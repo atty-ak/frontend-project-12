@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { addChannels, channelsSelectors } from '../../slices/channels';
+import { addChannels, setCurChannel, channelsSelectors } from '../../slices/channels';
 import { fetchMessages, messagesSelectors } from '../../slices/messages';
 import routes from '../../routes';
 import useAuth from '../../hooks/useAuth';
@@ -18,14 +18,14 @@ const ChatPage = () => {
   const { getAuthHeader } = useAuth();
   const modalState = useSelector((state) => state.modal.value);
   const channelsList = useSelector(channelsSelectors.selectAll);
+  const curChannel = useSelector((state) => state.channels.curChannel);
   const messagesList = useSelector(messagesSelectors.selectAll);
-
-  const [curChannel, setChannel] = useState(channelsList.find((channel) => channel.id === 1));
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(routes.data, { headers: getAuthHeader() });
+        const userId = JSON.parse(localStorage.getItem('userId'));
+        const response = await axios.get(routes.data, { headers: getAuthHeader(userId) });
         const { channels, messages } = response.data;
         dispatch(addChannels(channels));
         if (messages.length !== 0) {
@@ -47,9 +47,17 @@ const ChatPage = () => {
             <span>Каналы</span>
             <button onClick={() => dispatch(addModal({ type: 'add' }))} type="button" aria-label="Add channel" className="p-0 text-primary btn btn-group-vertical">+</button>
           </div>
-          <Channels curChannel={curChannel} channelsList={channelsList} setChannel={setChannel} />
+          <Channels
+            curChannel={curChannel}
+            channelsList={channelsList}
+            setCurChannel={setCurChannel}
+          />
         </div>
-        <Messages curChannel={curChannel} messagesList={messagesList} />
+        <Messages
+          curChannel={curChannel}
+          messagesList={messagesList}
+          channelsList={channelsList}
+        />
         {getModal(modalState)}
       </div>
     </div>

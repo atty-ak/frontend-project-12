@@ -4,19 +4,18 @@ import { Button, Dropdown } from 'react-bootstrap';
 import classNames from 'classnames';
 import { addModal } from '../../slices/modal';
 
-const Channels = ({ curChannel, channelsList, setChannel }) => {
+const Channels = ({ curChannel, channelsList, setCurChannel }) => {
   const dispatch = useDispatch();
 
   const chooseChannel = (id) => {
-    const newChannel = channelsList.find((channel) => channel.id === id);
-    setChannel(newChannel);
+    dispatch(setCurChannel(id));
   };
 
   return (
     <ul className="nav flex-column nav-pills nav-fill px-2">
       {channelsList.map((channel) => {
-        const btnClasses = classNames('w-100', 'rounded-0', 'text-start', 'btn', { 'btn-secondary': channel.id === curChannel.id });
-        const dropdownBtnClasses = classNames('d-flex', 'btn-group', { 'btn-secondary': channel.id === curChannel.id });
+        const btnClasses = classNames('w-100', 'rounded-0', 'text-start', 'btn', { 'btn-secondary': channel.id === curChannel });
+        const dropdownBtnClasses = classNames('d-flex', 'btn-group', { 'btn-secondary': channel.id === curChannel });
         if (channel.removable) {
           return (
             <li key={channel.id} className="nav-item w-100">
@@ -25,8 +24,9 @@ const Channels = ({ curChannel, channelsList, setChannel }) => {
                   <span className="me-1">#</span>
                   {channel.name}
                 </Button>
-                <Dropdown.Toggle variant={channel.id === curChannel.id ? 'btn-secondary' : ''} />
-
+                <Dropdown.Toggle variant={channel.id === curChannel ? 'btn-secondary' : ''}>
+                  <span className="visually-hidden">Каналы</span>
+                </Dropdown.Toggle>
                 <Dropdown.Menu>
                   <Dropdown.Item href="#/action-1" onClick={() => dispatch(addModal({ type: 'remove', channel }))}>Удалить</Dropdown.Item>
                   <Dropdown.Item href="#/action-2" onClick={() => dispatch(addModal({ type: 'rename', channel }))}>Переименовать</Dropdown.Item>

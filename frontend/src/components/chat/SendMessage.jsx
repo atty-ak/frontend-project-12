@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import _ from 'lodash';
 import useSocket from '../../hooks/useSocket';
 
-const SendMessage = ({ loggedIn, channelId }) => {
+const SendMessage = ({ loggedIn, curChannel }) => {
   const [message, setMessage] = useState('');
   const inputEl = useRef(null);
 
@@ -16,7 +16,7 @@ const SendMessage = ({ loggedIn, channelId }) => {
     e.preventDefault();
     if (message.length !== 0) {
       const formedMessage = {
-        channelId,
+        channelId: curChannel,
         userId: loggedIn,
         id: _.uniqueId(),
         value: message,

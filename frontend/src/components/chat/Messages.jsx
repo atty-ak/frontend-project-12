@@ -2,7 +2,7 @@ import React from 'react';
 import SendMessage from './SendMessage';
 import useAuth from '../../hooks/useAuth';
 
-const Messages = ({ curChannel, messagesList }) => {
+const Messages = ({ curChannel, messagesList, channelsList }) => {
   const { loggedIn } = useAuth();
 
   return (
@@ -12,18 +12,18 @@ const Messages = ({ curChannel, messagesList }) => {
           <p className="m-0">
             <b>
               #
-              {curChannel?.name}
+              {channelsList.find((channel) => channel.id === curChannel)?.name}
             </b>
           </p>
           <span className="text-muted">
             <span>Сообщений: </span>
             {messagesList
-              .filter((message) => message.channelId === curChannel.id).length}
+              .filter((message) => message.channelId === curChannel).length}
           </span>
         </div>
         <div id="messages-box" className="chat-messages overflow-auto px-5 ">
           {messagesList
-            .filter((message) => message.channelId === curChannel.id)
+            .filter((message) => message.channelId === curChannel)
             .map((message) => (
               <div key={message.id} className="text-break mb-2">
                 <b>{message.userId}</b>
@@ -32,7 +32,7 @@ const Messages = ({ curChannel, messagesList }) => {
               </div>
             ))}
         </div>
-        <SendMessage loggedIn={loggedIn} channelId={curChannel?.id} />
+        <SendMessage loggedIn={loggedIn} curChannel={curChannel} />
       </div>
     </div>
   );

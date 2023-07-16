@@ -81,7 +81,7 @@ export default {
     },
     notifies: {
       networkError: 'Ошибка соединения',
-      channelAdd: 'Канал добавлен',
+      channelAdd: 'Канал создан',
       channelRemove: 'Канал удалён',
       channelRename: 'Канал переименован',
     },

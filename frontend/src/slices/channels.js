@@ -11,13 +11,23 @@ const channelsSlice = createSlice({
   },
   reducers: {
     addChannels: channelsAdapter.addMany,
-    addChannel: channelsAdapter.addOne,
+    addChannel: (state, { payload }) => {
+      const newChannel = {
+        id: state.ids.length + 1,
+        ...payload,
+      };
+      channelsAdapter.addOne(state, newChannel);
+      // eslint-disable-next-line no-param-reassign
+      state.curChannel = newChannel.id; // Обновляем curChannel
+    },
     setCurChannel: (state, { payload }) => {
       // eslint-disable-next-line no-param-reassign
       state.curChannel = payload;
     },
     removeChannel: (state, { payload }) => {
       channelsAdapter.removeOne(state, payload);
+      // eslint-disable-next-line no-param-reassign
+      state.curChannel = 1;
     },
     renameChannel: channelsAdapter.updateOne,
   },

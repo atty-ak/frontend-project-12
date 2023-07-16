@@ -24,9 +24,9 @@ const Messages = ({ curChannel, messagesList, channelsList }) => {
             </b>
           </p>
           <span className="text-muted">
-            <span>{t('messagesCount')}</span>
-            {messagesList
-              .filter((message) => message.channelId === curChannel).length}
+            {t('messagesCount')}
+            {' '}
+            {messagesList.filter((message) => message.channelId === curChannel).length}
           </span>
         </div>
         <div id="messages-box" className="chat-messages overflow-auto px-5 ">

@@ -36,7 +36,8 @@ export default {
         },
       },
       messages: {
-        messagesCount: 'Сообщений: ',
+        messagesCount: 'Сообщений:',
+        channelСontrol: 'Управление каналом',
         sendMessagesForm: {
           placeholder: 'Введите сообщение...',
           send: 'Отправить',

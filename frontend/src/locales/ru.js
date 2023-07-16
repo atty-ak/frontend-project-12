@@ -3,7 +3,7 @@ export default {
     loginPage: {
       enter: 'Войти',
       username: 'Ваш ник',
-      password: 'Ваш пароль',
+      password: 'Пароль',
       noAcc: 'Нет аккаунта? ',
       registration: 'Регистрация',
       errors: {
@@ -17,7 +17,6 @@ export default {
       confirmPassword: 'Подтвердите пароль',
       signup: 'Зарегистрироваться',
       errors: {
-        min3: 'Не менее 3 символов',
         min6: 'Не менее 6 символов',
         max20: 'Не более 20 символов',
         required: 'Обязательное поле',
@@ -81,7 +80,7 @@ export default {
     notifies: {
       networkError: 'Ошибка соединения',
       channelAdd: 'Канал добавлен',
-      channelRemove: 'Канал удален',
+      channelRemove: 'Канал удалён',
       channelRename: 'Канал переименован',
     },
   },

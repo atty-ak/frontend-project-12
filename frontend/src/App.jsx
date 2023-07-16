@@ -3,6 +3,9 @@ import {
 } from 'react-router-dom';
 import { io } from 'socket.io-client';
 import { useDispatch } from 'react-redux';
+import i18n from 'i18next';
+import { I18nextProvider, initReactI18next } from 'react-i18next';
+import resources from './locales/index';
 import ChatPage from './components/chat/ChatPage';
 import ErrorPage from './components/ErrorPage';
 import LoginPage from './components/LoginPage';
@@ -23,6 +26,13 @@ const PrivateRoute = ({ children }) => {
     auth.loggedIn ? children : <Navigate to={routes.loginPage} state={{ from: location }} />
   );
 };
+
+i18n
+  .use(initReactI18next)
+  .init({
+    resources,
+    fallbackLng: 'ru',
+  });
 
 const App = () => {
   const dispatch = useDispatch();
@@ -45,17 +55,21 @@ const App = () => {
 
   return (
     <AuthProvider>
-      <SocketProvider socket={socket}>
-        <NavBar />
-        <Router>
-          <Routes>
-            <Route path={routes.chatPage} element={<PrivateRoute><ChatPage /></PrivateRoute>} />
-            <Route path={routes.loginPage} element={<LoginPage />} />
-            <Route path={routes.signupPage} element={<SignupPage />} />
-            <Route path="*" element={<ErrorPage />} />
-          </Routes>
-        </Router>
-      </SocketProvider>
+      <I18nextProvider i18n={i18n}>
+        <SocketProvider socket={socket}>
+          <div className="d-flex flex-column h-100">
+            <NavBar />
+            <Router>
+              <Routes>
+                <Route path={routes.chatPage} element={<PrivateRoute><ChatPage /></PrivateRoute>} />
+                <Route path={routes.loginPage} element={<LoginPage />} />
+                <Route path={routes.signupPage} element={<SignupPage />} />
+                <Route path="*" element={<ErrorPage />} />
+              </Routes>
+            </Router>
+          </div>
+        </SocketProvider>
+      </I18nextProvider>
     </AuthProvider>
   );
 };

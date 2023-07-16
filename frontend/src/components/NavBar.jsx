@@ -1,15 +1,17 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import useAuth from '../hooks/useAuth';
 
 const ExitButton = () => {
   const { loggedIn, logOut } = useAuth();
+  const { t } = useTranslation('translation', { keyPrefix: 'navBar' });
 
   if (!loggedIn) {
     return '';
   }
 
   return (
-    <button type="button" className="btn btn-primary" onClick={logOut}>Выйти</button>
+    <button type="button" className="btn btn-primary" onClick={logOut}>{t('logOut')}</button>
   );
 };
 

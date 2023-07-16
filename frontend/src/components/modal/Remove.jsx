@@ -1,12 +1,14 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Modal, Button } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 import { addModal } from '../../slices/modal';
 import useSocket from '../../hooks/useSocket';
 
 const Remove = ({ channelId }) => {
   const dispatch = useDispatch();
   const chatApi = useSocket();
+  const { t } = useTranslation('translation', { keyPrefix: 'modal.remove' });
 
   const handleSubmit = (id) => {
     chatApi.removeChannel(id);
@@ -16,15 +18,15 @@ const Remove = ({ channelId }) => {
   return (
     <Modal show onHide={() => dispatch(addModal({ type: 'unactive' }))}>
       <Modal.Header>
-        <Modal.Title>Удалить канал</Modal.Title>
+        <Modal.Title>{t('deleteChannel')}</Modal.Title>
         <button type="button" className="btn-close" aria-label="Close" onClick={() => dispatch(addModal({ type: 'unactive' }))} />
       </Modal.Header>
       <Modal.Body>
-        Уверены?
+        {t('sure')}
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={() => dispatch(addModal({ type: 'unactive' }))}>Отмена</Button>
-        <Button variant="danger" type="submit" onClick={() => handleSubmit(channelId)}>Удалить</Button>
+        <Button variant="secondary" onClick={() => dispatch(addModal({ type: 'unactive' }))}>{t('cancel')}</Button>
+        <Button variant="danger" type="submit" onClick={() => handleSubmit(channelId)}>{t('delete')}</Button>
       </Modal.Footer>
     </Modal>
   );

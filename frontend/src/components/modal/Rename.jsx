@@ -39,7 +39,7 @@ const Rename = ({ channel }) => {
 
   useEffect(() => {
     inputEl.current.focus();
-  }, []);
+  });
 
   return (
     <Modal show onHide={() => dispatch(addModal({ type: 'unactive' }))}>

@@ -30,6 +30,7 @@ export default {
         channels: 'Каналы',
       },
       channels: {
+        channelСontrol: 'Управление каналом',
         dropdown: {
           delete: 'Удалить',
           rename: 'Переименовать',
@@ -37,7 +38,6 @@ export default {
       },
       messages: {
         messagesCount: 'Сообщений:',
-        channelСontrol: 'Управление каналом',
         sendMessagesForm: {
           placeholder: 'Введите сообщение...',
           send: 'Отправить',

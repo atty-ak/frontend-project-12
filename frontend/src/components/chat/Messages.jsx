@@ -8,7 +8,9 @@ const Messages = ({ curChannel, messagesList, channelsList }) => {
   const { loggedIn } = useAuth();
   const { t } = useTranslation('translation', { keyPrefix: 'chatPage.messages' });
 
-  filter.loadDictionary('ru');
+  filter.add(filter.getDictionary('en'));
+  filter.add(filter.getDictionary('fr'));
+  filter.add(filter.getDictionary('ru'));
 
   return (
     <div className="col p-0 h-100">

@@ -30,8 +30,8 @@ const SignupPage = () => {
     },
     validationSchema: object({
       username: string()
-        .min(3, t('errors.min3'))
-        .max(20, t('errors.max20'))
+        .min(3, t('errors.minMax'))
+        .max(20, t('errors.minMax'))
         .required(t('errors.required')),
       password: string()
         .min(6, t('errors.min6'))

@@ -5,6 +5,7 @@ import { io } from 'socket.io-client';
 import { useDispatch } from 'react-redux';
 import i18n from 'i18next';
 import { I18nextProvider, initReactI18next } from 'react-i18next';
+import { Provider, ErrorBoundary } from '@rollbar/react';
 import resources from './locales/index';
 import ChatPage from './components/chat/ChatPage';
 import ErrorPage from './components/ErrorPage';
@@ -27,14 +28,17 @@ const PrivateRoute = ({ children }) => {
   );
 };
 
-i18n
-  .use(initReactI18next)
-  .init({
-    resources,
-    fallbackLng: 'ru',
-  });
-
 const App = () => {
+  i18n
+    .use(initReactI18next)
+    .init({
+      resources,
+      fallbackLng: 'ru',
+    });
+  const rollbarConfig = {
+    accessToken: 'POST_CLIENT_ITEM_ACCESS_TOKEN',
+    environment: 'production',
+  };
   const dispatch = useDispatch();
   const socket = io();
 
@@ -54,23 +58,34 @@ const App = () => {
   });
 
   return (
-    <AuthProvider>
-      <I18nextProvider i18n={i18n}>
-        <SocketProvider socket={socket}>
-          <div className="d-flex flex-column h-100">
-            <NavBar />
-            <Router>
-              <Routes>
-                <Route path={routes.chatPage} element={<PrivateRoute><ChatPage /></PrivateRoute>} />
-                <Route path={routes.loginPage} element={<LoginPage />} />
-                <Route path={routes.signupPage} element={<SignupPage />} />
-                <Route path="*" element={<ErrorPage />} />
-              </Routes>
-            </Router>
-          </div>
-        </SocketProvider>
-      </I18nextProvider>
-    </AuthProvider>
+    <Provider config={rollbarConfig}>
+      <ErrorBoundary>
+        <AuthProvider>
+          <I18nextProvider i18n={i18n}>
+            <SocketProvider socket={socket}>
+              <div className="d-flex flex-column h-100">
+                <NavBar />
+                <Router>
+                  <Routes>
+                    <Route
+                      path={routes.chatPage}
+                      element={(
+                        <PrivateRoute>
+                          <ChatPage />
+                        </PrivateRoute>
+                        )}
+                    />
+                    <Route path={routes.loginPage} element={<LoginPage />} />
+                    <Route path={routes.signupPage} element={<SignupPage />} />
+                    <Route path="*" element={<ErrorPage />} />
+                  </Routes>
+                </Router>
+              </div>
+            </SocketProvider>
+          </I18nextProvider>
+        </AuthProvider>
+      </ErrorBoundary>
+    </Provider>
   );
 };
 

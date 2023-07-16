@@ -79,7 +79,7 @@ export default {
       notFound: 'Страница не найдена',
     },
     notifies: {
-      networkError: 'Ошибка сети',
+      networkError: 'Ошибка соединения',
       channelAdd: 'Канал добавлен',
       channelRemove: 'Канал удален',
       channelRename: 'Канал переименован',

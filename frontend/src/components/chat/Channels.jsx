@@ -10,6 +10,7 @@ const Channels = ({ curChannel, channelsList, setCurChannel }) => {
   const { t } = useTranslation('translation', { keyPrefix: 'chatPage.channels' });
 
   const chooseChannel = (id) => {
+    console.log(id);
     dispatch(setCurChannel(id));
   };
 
@@ -27,7 +28,7 @@ const Channels = ({ curChannel, channelsList, setCurChannel }) => {
                   {channel.name}
                 </Button>
                 <Dropdown.Toggle variant={channel.id === curChannel ? 'btn-secondary' : ''}>
-                  <span className="visually-hidden">Каналы</span>
+                  <span className="visually-hidden">{t('channels')}</span>
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   <Dropdown.Item href="#/action-1" onClick={() => dispatch(addModal({ type: 'remove', channel }))}>{t('dropdown.delete')}</Dropdown.Item>

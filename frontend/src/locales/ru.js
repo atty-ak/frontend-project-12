@@ -78,5 +78,11 @@ export default {
     errorPage: {
       notFound: 'Страница не найдена',
     },
+    notifies: {
+      networkError: 'Ошибка сети',
+      channelAdd: 'Канал добавлен',
+      channelRemove: 'Канал удален',
+      channelRename: 'Канал переименован',
+    },
   },
 };

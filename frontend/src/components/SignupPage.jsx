@@ -5,6 +5,8 @@ import axios from 'axios';
 import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import routes from '../routes';
 import useAuth from '../hooks/useAuth';
 
@@ -43,7 +45,9 @@ const SignupPage = () => {
         auth.logIn(username);
         navigate(routes.chatPage);
       } catch (e) {
-        console.log(e);
+        if (e.code === 'ERR_NETWORK') {
+          toast.error(t('notifies.networkError'));
+        }
         setErrorState(true);
       }
     },
@@ -80,6 +84,7 @@ const SignupPage = () => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

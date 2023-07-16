@@ -6,6 +6,8 @@ import { useFormik } from 'formik';
 import { object, string } from 'yup';
 import classNames from 'classnames';
 import { useTranslation } from 'react-i18next';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import useAuth from '../hooks/useAuth';
 import routes from '../routes';
 
@@ -14,7 +16,7 @@ const LoginPage = () => {
   const [errorState, setErrorState] = useState(false);
   const inputRef = useRef(null);
   const navigate = useNavigate();
-  const { t } = useTranslation('translation', { keyPrefix: 'loginPage' });
+  const { t } = useTranslation();
 
   useEffect(() => {
     inputRef.current.focus();
@@ -40,6 +42,9 @@ const LoginPage = () => {
         auth.logIn(userId.username);
         navigate(routes.chatPage);
       } catch (err) {
+        if (err.code === 'ERR_NETWORK') {
+          toast.error(t('notifies.networkError'));
+        }
         setErrorState(true);
       }
     },
@@ -54,7 +59,7 @@ const LoginPage = () => {
                 <img src="/pictures/chat_form.jpeg" className="rounded-circle" alt="Войти" />
               </div>
               <Form className="col-12 col-md-6 mt-3 mt-mb-0" onSubmit={formik.handleSubmit}>
-                <h1 className="text-center mb-4">{t('enter')}</h1>
+                <h1 className="text-center mb-4">{t('loginPage.enter')}</h1>
                 <Form.Group className="form-floating mb-3">
                   <Form.Control
                     name="username"
@@ -67,7 +72,7 @@ const LoginPage = () => {
                     onChange={formik.handleChange}
                     value={formik.values.username}
                   />
-                  <Form.Label htmlFor="username">{t('username')}</Form.Label>
+                  <Form.Label htmlFor="username">{t('loginPage.username')}</Form.Label>
                 </Form.Group>
                 <Form.Group className="form-floating mb-4">
                   <Form.Control
@@ -81,21 +86,22 @@ const LoginPage = () => {
                     onChange={formik.handleChange}
                     value={formik.values.password}
                   />
-                  <Form.Label htmlFor="password">{t('password')}</Form.Label>
-                  {errorState && <div className="invalid-tooltip" style={{ display: 'block' }}>{t('errors.wrongLoginOrPass')}</div>}
+                  <Form.Label htmlFor="password">{t('loginPage.password')}</Form.Label>
+                  {errorState && <div className="invalid-tooltip" style={{ display: 'block' }}>{t('loginPage.errors.wrongLoginOrPass')}</div>}
                 </Form.Group>
-                <Button type="submit" variant="outline-primary" className="w-100 mb-3">Войти</Button>
+                <Button type="submit" variant="outline-primary" className="w-100 mb-3">{t('loginPage.enter')}</Button>
               </Form>
             </div>
             <div className="card-footer p-4">
               <div className="text-center">
-                <span>{t('noAcc')}</span>
-                <a href={routes.signupPage}>{t('registration')}</a>
+                <span>{t('loginPage.noAcc')}</span>
+                <a href={routes.signupPage}>{t('loginPage.registration')}</a>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

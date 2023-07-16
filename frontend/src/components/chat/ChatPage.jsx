@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { ToastContainer } from 'react-toastify';
 import { addChannels, setCurChannel, channelsSelectors } from '../../slices/channels';
 import { fetchMessages, messagesSelectors } from '../../slices/messages';
 import routes from '../../routes';
@@ -75,6 +76,7 @@ const ChatPage = () => {
         />
         {getModal(modalState)}
       </div>
+      <ToastContainer />
     </div>
   );
 };

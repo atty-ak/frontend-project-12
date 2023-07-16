@@ -30,7 +30,7 @@ const Rename = ({ channel }) => {
     validationSchema: object({
       name: string()
         .min(3, t('modal.rename.errors.minMax'))
-        .max(15, t('modal.rename.errors.minMax'))
+        .max(20, t('modal.rename.errors.minMax'))
         .required(t('modal.rename.errors.required'))
         .notOneOf(channelsName, t('modal.rename.errors.uniqName')),
     }),

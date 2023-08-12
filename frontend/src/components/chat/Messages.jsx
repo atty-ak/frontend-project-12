@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import filter from 'leo-profanity';
 import SendMessage from './SendMessage';
@@ -7,10 +7,15 @@ import useAuth from '../../hooks/useAuth';
 const Messages = ({ curChannel, messagesList, channelsList }) => {
   const { loggedIn } = useAuth();
   const { t } = useTranslation('translation', { keyPrefix: 'chatPage.messages' });
+  const messagesRef = useRef(null);
 
   filter.add(filter.getDictionary('en'));
   filter.add(filter.getDictionary('fr'));
   filter.add(filter.getDictionary('ru'));
+
+  useEffect(() => {
+    messagesRef.current?.lastElementChild?.scrollIntoView({ behavior: 'smooth' });
+  }, [messagesList]);
 
   return (
     <div className="col p-0 h-100">
@@ -29,7 +34,7 @@ const Messages = ({ curChannel, messagesList, channelsList }) => {
             {messagesList.filter((message) => message.channelId === curChannel).length}
           </span>
         </div>
-        <div id="messages-box" className="chat-messages overflow-auto px-5 ">
+        <div ref={messagesRef} id="messages-box" className="chat-messages overflow-auto px-5 ">
           {messagesList
             .filter((message) => message.channelId === curChannel)
             .map((message) => (

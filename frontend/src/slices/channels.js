@@ -12,13 +12,7 @@ const channelsSlice = createSlice({
   reducers: {
     addChannels: channelsAdapter.addMany,
     addChannel: (state, { payload }) => {
-      const newChannel = {
-        id: state.ids.length + 1,
-        ...payload,
-      };
-      channelsAdapter.addOne(state, newChannel);
-      // eslint-disable-next-line no-param-reassign
-      state.curChannel = newChannel.id; // Обновляем curChannel
+      channelsAdapter.addOne(state, payload);
     },
     setCurChannel: (state, { payload }) => {
       // eslint-disable-next-line no-param-reassign

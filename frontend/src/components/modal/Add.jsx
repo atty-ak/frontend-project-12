@@ -15,7 +15,7 @@ const Add = () => {
   const chatApi = useSocket();
   const inputEl = useRef(null);
   const { t } = useTranslation();
-  const channelsName = useSelector(channelsSelectors.selectAll).map(({ name }) => name);
+  const channelsList = useSelector(channelsSelectors.selectAll);
 
   const handleSubmit = (name) => {
     chatApi.addChannel({ name });
@@ -32,7 +32,7 @@ const Add = () => {
         .min(3, t('modal.add.errors.minMax'))
         .max(20, t('modal.add.errors.minMax'))
         .required(t('modal.add.errors.required'))
-        .notOneOf(channelsName, t('modal.add.errors.uniqName')),
+        .notOneOf(channelsList.map(({ name }) => name), t('modal.add.errors.uniqName')),
     }),
     onSubmit: ({ name }) => handleSubmit(name),
   });

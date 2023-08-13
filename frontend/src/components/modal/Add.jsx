@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { object, string } from 'yup';
 import { addModal } from '../../slices/modal';
 import useSocket from '../../hooks/useSocket';
-import { channelsSelectors } from '../../slices/channels';
+import { channelsSelectors, setCurChannel } from '../../slices/channels';
 
 const Add = () => {
   const dispatch = useDispatch();
@@ -17,10 +17,11 @@ const Add = () => {
   const { t } = useTranslation();
   const channelsList = useSelector(channelsSelectors.selectAll);
 
-  const handleSubmit = (name) => {
-    chatApi.addChannel({ name });
+  const handleSubmit = async (name) => {
+    const { data } = await chatApi.addChannel({ name });
     setTimeout(() => toast.success(t('notifies.channelAdd')));
     dispatch(addModal({ type: 'unactive' }));
+    dispatch(setCurChannel(data.id));
   };
 
   const formik = useFormik({

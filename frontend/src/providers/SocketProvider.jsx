@@ -4,7 +4,7 @@ import SocketContext from '../contexts/SocketContext';
 const SocketProvider = ({ socket, children }) => {
   const chatApi = {
     addMessage: (message) => socket.emit('newMessage', message),
-    addChannel: (channel) => socket.emit('newChannel', channel),
+    addChannel: (channel) => socket.emitWithAck('newChannel', channel),
     removeChannel: (id) => socket.emit('removeChannel', { id }),
     renameChannel: ({ id, name }) => socket.emit('renameChannel', { id, name }),
   };

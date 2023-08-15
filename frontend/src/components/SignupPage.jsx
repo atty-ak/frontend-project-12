@@ -42,7 +42,7 @@ const SignupPage = () => {
     }),
     onSubmit: async (values) => {
       try {
-        const response = await axios.post(routes.signupData, {
+        const response = await axios.post(routes.signupPath(), {
           username: values.username, password: values.password,
         });
         const { token, username } = response.data;

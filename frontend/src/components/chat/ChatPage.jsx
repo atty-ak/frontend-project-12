@@ -28,7 +28,7 @@ const ChatPage = () => {
     const fetchData = async () => {
       try {
         const userId = JSON.parse(localStorage.getItem('userId'));
-        const response = await axios.get(routes.data, { headers: getAuthHeader(userId) });
+        const response = await axios.get(routes.dataPath(), { headers: getAuthHeader(userId) });
         const { channels, messages } = response.data;
         dispatch(addChannels(channels));
         if (messages.length !== 0) {

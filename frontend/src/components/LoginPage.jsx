@@ -35,7 +35,7 @@ const LoginPage = () => {
     }),
     onSubmit: async (values) => {
       try {
-        const response = await axios.post(routes.login, values);
+        const response = await axios.post(routes.loginPath(), values);
         const { token, username } = response.data;
         localStorage.setItem('userId', JSON.stringify({ token, username }));
         const userId = JSON.parse(localStorage.getItem('userId'));

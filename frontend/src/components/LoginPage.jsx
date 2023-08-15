@@ -36,7 +36,6 @@ const LoginPage = () => {
     onSubmit: async (values) => {
       try {
         await auth.logIn(values);
-        console.log(values);
         navigate(routes.chatPage);
       } catch (err) {
         if (err.code === 'ERR_NETWORK') {

@@ -32,7 +32,7 @@ const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={{
-      loggedIn, logIn, logOut, signup, getAuthHeader,
+      loggedIn, logIn, logOut, signup, getAuthHeader, userCurrent,
     }}
     >
       {children}

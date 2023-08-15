@@ -16,7 +16,7 @@ import Messages from './Messages';
 const ChatPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { getAuthHeader } = useAuth();
+  const { getAuthHeader, userCurrent } = useAuth();
   const { t } = useTranslation('translation', { keyPrefix: 'chatPage.main' });
 
   const modalState = useSelector((state) => state.modal.value);
@@ -27,8 +27,9 @@ const ChatPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const userId = JSON.parse(localStorage.getItem('userId'));
-        const response = await axios.get(routes.dataPath(), { headers: getAuthHeader(userId) });
+        const response = await axios.get(routes.dataPath(), {
+          headers: getAuthHeader(userCurrent),
+        });
         const { channels, messages } = response.data;
         dispatch(addChannels(channels));
         if (messages.length !== 0) {

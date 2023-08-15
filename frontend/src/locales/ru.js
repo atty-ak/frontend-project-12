@@ -42,7 +42,7 @@ export default {
         messagesCount: 'Сообщений:',
         hashSymbol: '#',
         sendMessagesForm: {
-          newMessagePlaceholder: 'Введите сообщение...',
+          newMessagePlaceholder: 'Новое сообщение',
           placeholder: 'Введите сообщение...',
           send: 'Отправить',
         },

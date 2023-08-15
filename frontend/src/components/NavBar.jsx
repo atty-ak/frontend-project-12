@@ -15,15 +15,18 @@ const ExitButton = () => {
   );
 };
 
-const NavBar = () => (
-  <nav className="shadow-sm navbar navbar-expand-lg navbar-light bg-white">
-    <div className="container">
-      <a className="navbar-brand" href="/" style={{ display: 'inline-block' }}>
-        Hexlet Chat
-      </a>
-      <ExitButton />
-    </div>
-  </nav>
-);
+const NavBar = () => {
+  const { t } = useTranslation('translation', { keyPrefix: 'navBar' });
+  return (
+    <nav className="shadow-sm navbar navbar-expand-lg navbar-light bg-white">
+      <div className="container">
+        <a className="navbar-brand" href="/" style={{ display: 'inline-block' }}>
+          {t('hexletChat')}
+        </a>
+        <ExitButton />
+      </div>
+    </nav>
+  );
+};
 
 export default NavBar;

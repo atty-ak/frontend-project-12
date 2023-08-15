@@ -23,7 +23,7 @@ const Channels = ({ currentChannel, channelsList, setCurrentChannel }) => {
             <li key={channel.id} className="nav-item w-100">
               <Dropdown className={dropdownBtnClasses}>
                 <Button variant="" type="button" className={btnClasses} onClick={() => chooseChannel(channel.id)}>
-                  <span className="me-1">#</span>
+                  <span className="me-1">{t('hashSymbol')}</span>
                   {channel.name}
                 </Button>
                 <Dropdown.Toggle variant={channel.id === currentChannel ? 'btn-secondary' : ''}>
@@ -41,7 +41,7 @@ const Channels = ({ currentChannel, channelsList, setCurrentChannel }) => {
           <li key={channel.id} className="nav-item w-100">
             <div className="d-flex dropdown btn-group">
               <Button variant="" type="button" className={btnClasses} onClick={() => chooseChannel(channel.id)}>
-                <span className="me-1">#</span>
+                <span className="me-1">{t('hashSymbol')}</span>
                 {channel.name}
               </Button>
             </div>

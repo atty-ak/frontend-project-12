@@ -8,6 +8,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import routes from '../routes';
 import useAuth from '../hooks/useAuth';
+import signupImg from '../pictures/signup_page.jpg';
 
 const SignupPage = () => {
   const [errorState, setErrorState] = useState(false);
@@ -58,21 +59,21 @@ const SignupPage = () => {
         <div className="col-12 col-md-8 col-xxl-6">
           <div className="card shadow-sm">
             <div className="card-body d-flex flex-column flex-md-row justify-content-around align-items-center p-5">
-              <div><img src="/pictures/signup_page.jpg" alt="Регистрация" /></div>
+              <div><img src={signupImg} alt={t('registration')} /></div>
               <form className="w-50" onSubmit={formik.handleSubmit}>
                 <h1 className="text-center mb-4">{t('registration')}</h1>
                 <div className="form-floating mb-3">
-                  <input ref={inputRef} placeholder="От 3 до 20 символов" name="username" autoComplete="username" required="" id="username" className={classNames('form-control', { 'is-invalid': formik.touched.username && formik.errors.username })} onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.username} />
+                  <input ref={inputRef} placeholder={t('errors.minMax')} name="username" autoComplete="username" required="" id="username" className={classNames('form-control', { 'is-invalid': formik.touched.username && formik.errors.username })} onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.username} />
                   <label className="form-label" htmlFor="username">{t('username')}</label>
                   {formik.touched.username && formik.errors.username && <div className="invalid-tooltip" style={{ display: 'block' }}>{formik.errors.username}</div>}
                 </div>
                 <div className="form-floating mb-3">
-                  <input placeholder="Не менее 6 символов" name="password" aria-describedby="passwordHelpBlock" required="" autoComplete="new-password" type="password" id="password" className={classNames('form-control', { 'is-invalid': formik.touched.password && formik.errors.password })} aria-autocomplete="list" onChange={formik.handleChange} value={formik.values.password} onBlur={formik.handleBlur} />
+                  <input placeholder={t('errors.min6')} name="password" aria-describedby="passwordHelpBlock" required="" autoComplete="new-password" type="password" id="password" className={classNames('form-control', { 'is-invalid': formik.touched.password && formik.errors.password })} aria-autocomplete="list" onChange={formik.handleChange} value={formik.values.password} onBlur={formik.handleBlur} />
                   <label className="form-label" htmlFor="password">{t('password')}</label>
                   {formik.touched.password && formik.errors.password && <div className="invalid-tooltip" style={{ display: 'block' }}>{formik.errors.password}</div>}
                 </div>
                 <div className="form-floating mb-4">
-                  <input placeholder="Пароли должны совпадать" name="confirmPassword" required="" autoComplete="new-password" type="password" id="confirmPassword" className={classNames('form-control', { 'is-invalid': formik.touched.confirmPassword && formik.errors.confirmPassword })} onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.confirmPassword} />
+                  <input placeholder={t('errors.mustMatch')} name="confirmPassword" required="" autoComplete="new-password" type="password" id="confirmPassword" className={classNames('form-control', { 'is-invalid': formik.touched.confirmPassword && formik.errors.confirmPassword })} onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.confirmPassword} />
                   <label className="form-label" htmlFor="confirmPassword">{t('confirmPassword')}</label>
                   {formik.touched.confirmPassword && formik.errors.confirmPassword && <div className="invalid-tooltip" style={{ display: 'block' }}>{formik.errors.confirmPassword}</div>}
                   {errorState && <div className="invalid-tooltip" style={{ display: 'block' }}>{t('errors.alreadyExist')}</div>}

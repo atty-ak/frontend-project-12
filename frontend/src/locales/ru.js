@@ -28,9 +28,11 @@ export default {
     chatPage: {
       main: {
         channels: 'Каналы',
+        plusSymbol: '+',
       },
       channels: {
         channelСontrol: 'Управление каналом',
+        hashSymbol: '#',
         dropdown: {
           delete: 'Удалить',
           rename: 'Переименовать',
@@ -38,7 +40,9 @@ export default {
       },
       messages: {
         messagesCount: 'Сообщений:',
+        hashSymbol: '#',
         sendMessagesForm: {
+          newMessagePlaceholder: 'Введите сообщение...',
           placeholder: 'Введите сообщение...',
           send: 'Отправить',
         },
@@ -75,9 +79,12 @@ export default {
     },
     navBar: {
       logOut: 'Выйти',
+      hexletChat: 'Hexlet Chat',
     },
     errorPage: {
       notFound: 'Страница не найдена',
+      variantToDo: 'Но вы можете перейти',
+      mainPage: 'на главную страницу',
     },
     notifies: {
       networkError: 'Ошибка соединения',

@@ -23,7 +23,7 @@ const Messages = ({ currentChannel, messagesList, channelsList }) => {
         <div className="bg-light mb-4 p-3 shadow-sm small">
           <p className="m-0">
             <b>
-              #
+              {t('hashSymbol')}
               {' '}
               { channelsList.find((channel) => channel.id === currentChannel)?.name}
             </b>

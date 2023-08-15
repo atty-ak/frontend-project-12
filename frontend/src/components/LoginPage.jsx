@@ -9,6 +9,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import useAuth from '../hooks/useAuth';
 import routes from '../routes';
+import loginImg from '../pictures/chat_form.jpeg';
 
 const LoginPage = () => {
   const auth = useAuth();
@@ -52,7 +53,7 @@ const LoginPage = () => {
           <div className="card shadow-sm">
             <div className="card-body row p-5">
               <div className="col-12 col-md-6 d-flex align-items-center justify-content-center">
-                <img src="/pictures/chat_form.jpeg" className="rounded-circle" alt="Войти" />
+                <img src={loginImg} className="rounded-circle" alt={t('loginPage.enter')} />
               </div>
               <Form className="col-12 col-md-6 mt-3 mt-mb-0" onSubmit={formik.handleSubmit}>
                 <h1 className="text-center mb-4">{t('loginPage.enter')}</h1>
@@ -61,7 +62,7 @@ const LoginPage = () => {
                     name="username"
                     autoComplete="username"
                     required
-                    placeholder="Ваш ник"
+                    placeholder={t('loginPage.username')}
                     id="username"
                     className={classNames({ 'is-invalid': errorState })}
                     ref={inputRef}
@@ -75,7 +76,7 @@ const LoginPage = () => {
                     name="password"
                     autoComplete="current-password"
                     required
-                    placeholder="Пароль"
+                    placeholder={t('loginPage.password')}
                     type="password"
                     id="password"
                     className={classNames({ 'is-invalid': errorState })}

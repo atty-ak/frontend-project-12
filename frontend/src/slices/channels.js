@@ -14,7 +14,7 @@ const channelsSlice = createSlice({
     addChannel: (state, { payload }) => {
       channelsAdapter.addOne(state, payload);
     },
-    setCurChannel: (state, { payload }) => {
+    setCurrentChannel: (state, { payload }) => {
       // eslint-disable-next-line no-param-reassign
       state.curChannel = payload;
     },
@@ -28,7 +28,7 @@ const channelsSlice = createSlice({
 });
 
 export const {
-  addChannels, addChannel, setCurChannel, removeChannel, renameChannel,
+  addChannels, addChannel, setCurrentChannel, removeChannel, renameChannel,
 } = channelsSlice.actions;
 export const channelsSelectors = channelsAdapter.getSelectors((state) => state.channels);
 

@@ -5,19 +5,19 @@ import { useTranslation } from 'react-i18next';
 import classNames from 'classnames';
 import { addModal } from '../../slices/modal';
 
-const Channels = ({ curChannel, channelsList, setCurChannel }) => {
+const Channels = ({ currentChannel, channelsList, setCurrentChannel }) => {
   const dispatch = useDispatch();
   const { t } = useTranslation('translation', { keyPrefix: 'chatPage.channels' });
 
   const chooseChannel = (id) => {
-    dispatch(setCurChannel(id));
+    dispatch(setCurrentChannel(id));
   };
 
   return (
     <ul id="channels-box" className="nav flex-column nav-pills nav-fill px-2 mb-3 overflow-auto h-100 d-block">
       {channelsList.map((channel) => {
-        const btnClasses = classNames('w-100', 'rounded-0', 'text-start', 'text-truncate', { 'btn-secondary': channel.id === curChannel });
-        const dropdownBtnClasses = classNames('d-flex', 'btn-group', { 'btn-secondary': channel.id === curChannel });
+        const btnClasses = classNames('w-100', 'rounded-0', 'text-start', 'text-truncate', { 'btn-secondary': channel.id === currentChannel });
+        const dropdownBtnClasses = classNames('d-flex', 'btn-group', { 'btn-secondary': channel.id === currentChannel });
         if (channel.removable) {
           return (
             <li key={channel.id} className="nav-item w-100">
@@ -26,7 +26,7 @@ const Channels = ({ curChannel, channelsList, setCurChannel }) => {
                   <span className="me-1">#</span>
                   {channel.name}
                 </Button>
-                <Dropdown.Toggle variant={channel.id === curChannel ? 'btn-secondary' : ''}>
+                <Dropdown.Toggle variant={channel.id === currentChannel ? 'btn-secondary' : ''}>
                   <span className="visually-hidden">{t('channelСontrol')}</span>
                 </Dropdown.Toggle>
                 <Dropdown.Menu>

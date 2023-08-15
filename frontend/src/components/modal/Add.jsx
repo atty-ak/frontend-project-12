@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { object, string } from 'yup';
 import { addModal } from '../../slices/modal';
 import useSocket from '../../hooks/useSocket';
-import { channelsSelectors, setCurChannel } from '../../slices/channels';
+import { channelsSelectors, setCurrentChannel } from '../../slices/channels';
 
 const Add = () => {
   const dispatch = useDispatch();
@@ -21,7 +21,7 @@ const Add = () => {
     const { data } = await chatApi.addChannel({ name });
     setTimeout(() => toast.success(t('notifies.channelAdd')));
     dispatch(addModal({ type: 'unactive' }));
-    dispatch(setCurChannel(data.id));
+    dispatch(setCurrentChannel(data.id));
   };
 
   const formik = useFormik({

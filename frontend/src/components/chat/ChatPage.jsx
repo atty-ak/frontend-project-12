@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ToastContainer } from 'react-toastify';
-import { addChannels, setCurChannel, channelsSelectors } from '../../slices/channels';
+import { addChannels, setCurrentChannel, channelsSelectors } from '../../slices/channels';
 import { fetchMessages, messagesSelectors } from '../../slices/messages';
 import routes from '../../routes';
 import useAuth from '../../hooks/useAuth';
@@ -21,7 +21,7 @@ const ChatPage = () => {
 
   const modalState = useSelector((state) => state.modal.value);
   const channelsList = useSelector(channelsSelectors.selectAll);
-  const curChannel = useSelector((state) => state.channels.curChannel);
+  const currentChannel = useSelector((state) => state.channels.curChannel);
   const messagesList = useSelector(messagesSelectors.selectAll);
 
   useEffect(() => {
@@ -64,13 +64,13 @@ const ChatPage = () => {
             </button>
           </div>
           <Channels
-            curChannel={curChannel}
+            currentChannel={currentChannel}
             channelsList={channelsList}
-            setCurChannel={setCurChannel}
+            setCurrentChannel={setCurrentChannel}
           />
         </div>
         <Messages
-          curChannel={curChannel}
+          currentChannel={currentChannel}
           messagesList={messagesList}
           channelsList={channelsList}
         />

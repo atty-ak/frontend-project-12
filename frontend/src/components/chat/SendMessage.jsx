@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import useSocket from '../../hooks/useSocket';
 
-const SendMessage = ({ loggedIn, curChannel }) => {
+const SendMessage = ({ loggedIn, currentChannel }) => {
   const [message, setMessage] = useState('');
   const inputEl = useRef(null);
   const { t } = useTranslation('translation', { keyPrefix: 'chatPage.messages.sendMessagesForm' });
@@ -17,7 +17,7 @@ const SendMessage = ({ loggedIn, curChannel }) => {
     e.preventDefault();
     if (message.length !== 0) {
       const formedMessage = {
-        channelId: curChannel,
+        channelId: currentChannel,
         userId: loggedIn,
         id: _.uniqueId(),
         value: message,

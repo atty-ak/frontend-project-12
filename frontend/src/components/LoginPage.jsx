@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
@@ -35,11 +34,8 @@ const LoginPage = () => {
     }),
     onSubmit: async (values) => {
       try {
-        const response = await axios.post(routes.loginPath(), values);
-        const { token, username } = response.data;
-        localStorage.setItem('userId', JSON.stringify({ token, username }));
-        const userId = JSON.parse(localStorage.getItem('userId'));
-        auth.logIn(userId.username);
+        await auth.logIn(values);
+        console.log(values);
         navigate(routes.chatPage);
       } catch (err) {
         if (err.code === 'ERR_NETWORK') {

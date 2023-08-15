@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { object, string } from 'yup';
 import { useFormik } from 'formik';
-import axios from 'axios';
 import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -42,12 +41,7 @@ const SignupPage = () => {
     }),
     onSubmit: async (values) => {
       try {
-        const response = await axios.post(routes.signupPath(), {
-          username: values.username, password: values.password,
-        });
-        const { token, username } = response.data;
-        localStorage.setItem('userId', JSON.stringify({ token, username }));
-        auth.logIn(username);
+        await auth.signup(values);
         navigate(routes.chatPage);
       } catch (e) {
         if (e.code === 'ERR_NETWORK') {

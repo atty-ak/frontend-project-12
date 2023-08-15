@@ -17,6 +17,8 @@ const Remove = ({ channelId }) => {
     dispatch(addModal({ type: 'unactive' }));
   };
 
+  const handleClose = () => dispatch(addModal({ type: 'unactive' }));
+
   return (
     <Modal show onHide={() => dispatch(addModal({ type: 'unactive' }))}>
       <Modal.Header>
@@ -27,7 +29,7 @@ const Remove = ({ channelId }) => {
         {t('modal.remove.sure')}
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={() => dispatch(addModal({ type: 'unactive' }))}>{t('modal.remove.cancel')}</Button>
+        <Button variant="secondary" onClick={handleClose}>{t('modal.remove.cancel')}</Button>
         <Button variant="danger" type="submit" onClick={() => handleSubmit(channelId)}>{t('modal.remove.delete')}</Button>
       </Modal.Footer>
     </Modal>

@@ -18,10 +18,10 @@ const Add = () => {
   const channelsList = useSelector(channelsSelectors.selectAll);
 
   const handleSubmit = async (name) => {
-    const { data } = await chatApi.addChannel({ name });
+    const channelId = await chatApi.addChannel({ name });
     setTimeout(() => toast.success(t('notifies.channelAdd')));
     dispatch(addModal({ type: 'unactive' }));
-    dispatch(setCurrentChannel(data.id));
+    dispatch(setCurrentChannel(channelId));
   };
 
   const formik = useFormik({

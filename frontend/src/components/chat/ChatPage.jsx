@@ -4,12 +4,14 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ToastContainer } from 'react-toastify';
-import { addChannels, setCurrentChannel, channelsSelectors } from '../../slices/channels';
+import {
+  addChannels, setCurrentChannel, channelsSelectors, getCurrentChannel,
+} from '../../slices/channels';
 import { fetchMessages, messagesSelectors } from '../../slices/messages';
 import routes from '../../routes';
 import useAuth from '../../hooks/useAuth';
 import getModal from '../modal/modals';
-import { addModal } from '../../slices/modal';
+import { addModal, getModalState } from '../../slices/modal';
 import Channels from './Channels';
 import Messages from './Messages';
 
@@ -19,9 +21,9 @@ const ChatPage = () => {
   const { getAuthHeader, userCurrent } = useAuth();
   const { t } = useTranslation('translation', { keyPrefix: 'chatPage.main' });
 
-  const modalState = useSelector((state) => state.modal.value);
+  const modalState = useSelector(getModalState);
   const channelsList = useSelector(channelsSelectors.selectAll);
-  const currentChannel = useSelector((state) => state.channels.curChannel);
+  const currentChannel = useSelector(getCurrentChannel);
   const messagesList = useSelector(messagesSelectors.selectAll);
 
   useEffect(() => {

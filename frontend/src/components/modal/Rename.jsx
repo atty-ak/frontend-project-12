@@ -23,6 +23,8 @@ const Rename = ({ channel }) => {
     dispatch(addModal({ type: 'unactive' }));
   };
 
+  const handleClose = () => dispatch(addModal({ type: 'unactive' }));
+
   const formik = useFormik({
     initialValues: {
       name: channel.name,
@@ -55,7 +57,7 @@ const Rename = ({ channel }) => {
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={() => dispatch(addModal({ type: 'unactive' }))}>{t('modal.rename.cancel')}</Button>
+        <Button variant="secondary" onClick={handleClose}>{t('modal.rename.cancel')}</Button>
         <Button variant="primary" type="submit" onClick={formik.handleSubmit}>{t('modal.rename.save')}</Button>
       </Modal.Footer>
     </Modal>

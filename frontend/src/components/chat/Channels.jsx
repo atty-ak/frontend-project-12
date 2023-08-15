@@ -13,6 +13,9 @@ const Channels = ({ currentChannel, channelsList, setCurrentChannel }) => {
     dispatch(setCurrentChannel(id));
   };
 
+  const deleteChannelHandler = (channel) => dispatch(addModal({ type: 'remove', channel }));
+  const renameChannelHandler = (channel) => dispatch(addModal({ type: 'rename', channel }));
+
   return (
     <ul id="channels-box" className="nav flex-column nav-pills nav-fill px-2 mb-3 overflow-auto h-100 d-block">
       {channelsList.map((channel) => {
@@ -30,8 +33,8 @@ const Channels = ({ currentChannel, channelsList, setCurrentChannel }) => {
                   <span className="visually-hidden">{t('channelСontrol')}</span>
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                  <Dropdown.Item onClick={() => dispatch(addModal({ type: 'remove', channel }))}>{t('dropdown.delete')}</Dropdown.Item>
-                  <Dropdown.Item onClick={() => dispatch(addModal({ type: 'rename', channel }))}>{t('dropdown.rename')}</Dropdown.Item>
+                  <Dropdown.Item onClick={() => deleteChannelHandler(channel)}>{t('dropdown.delete')}</Dropdown.Item>
+                  <Dropdown.Item onClick={() => renameChannelHandler(channel)}>{t('dropdown.rename')}</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </li>

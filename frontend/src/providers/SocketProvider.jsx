@@ -3,10 +3,19 @@ import SocketContext from '../contexts/SocketContext';
 
 const SocketProvider = ({ socket, children }) => {
   const chatApi = {
-    addMessage: (message) => socket.emit('newMessage', message),
-    addChannel: (channel) => socket.emitWithAck('newChannel', channel),
-    removeChannel: (id) => socket.emit('removeChannel', { id }),
-    renameChannel: ({ id, name }) => socket.emit('renameChannel', { id, name }),
+    addMessage: async (message) => {
+      await socket.emit('newMessage', message);
+    },
+    addChannel: async (channel) => {
+      const { data } = await socket.emitWithAck('newChannel', channel);
+      return data.id;
+    },
+    removeChannel: async (id) => {
+      await socket.emit('removeChannel', { id });
+    },
+    renameChannel: async ({ id, name }) => {
+      await socket.emit('renameChannel', { id, name });
+    },
   };
 
   return (
